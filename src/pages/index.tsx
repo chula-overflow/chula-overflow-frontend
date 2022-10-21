@@ -6,13 +6,10 @@ const Home: NextPage = () => {
     <DescribeRoute title="Next.js boilerplate" description="by betich">
       <main>
         <h1>Next.js App</h1>
-        <p className="mt-2 mb-4 text-sm font-bold text-white">
-          Generated using{" "}
-          <a href="https://github.com/betich/next-boilerplate" target="_blank" rel="noreferrer">
-            {"betich's"}
-          </a>{" "}
-          Next.js boilerplate template
-        </p>
+        <p>Chula Overflow</p>
+        <p>จุฬาโอเวอร์โฟล์ว</p>
+        <p className="font-semibold">Chula Overflow </p>
+        <div className="w-full h-6 bg-cuof-gradient-h"></div>
       </main>
     </DescribeRoute>
   )

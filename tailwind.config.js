@@ -7,64 +7,15 @@ module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            h1: {
-              color: theme("colors.gray.900"),
-              fontWeight: "800",
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h2: {
-              color: theme("colors.gray.900"),
-              fontWeight: "700",
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h3: {
-              color: theme("colors.gray.900"),
-              fontWeight: "600",
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h4: {
-              color: theme("colors.gray.900"),
-              fontWeight: "600",
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-          },
-        },
-        lg: {
-          css: {
-            h1: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h2: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h3: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h4: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-          },
-        },
-        xl: {
-          css: {
-            h1: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h2: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h3: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-            h4: {
-              fontFamily: `${theme("fontFamily.display")}`,
-            },
-          },
-        },
-      }),
+      colors: {
+        "cuof-grey-01": "#FAFAFA",
+        "cuof-grey-02": "#666666",
+        "cuof-grey-03": "#413A43",
+      },
+      backgroundImage: {
+        "cuof-gradient-h": "linear-gradient(90deg, #FFC83A 2.5%, #FF7C32 11.5%, #FF008C 43.5%)",
+        "cuof-gradient-v": "linear-gradient(180deg, #FFC83A 2.5%, #FF7C32 11.5%, #FF008C 43.5%)",
+      },
     },
     screens: {
       sm: "640px",
@@ -73,14 +24,7 @@ module.exports = {
       xl: "1280px",
     },
     fontFamily: {
-      display: [
-        "Inter var",
-        "Noto Sans Thai",
-        "SF Pro Display",
-        "Sukhumvit Set",
-        "IBM Plex Sans Thai",
-        ...defaultTheme.fontFamily.sans,
-      ],
+      display: ["Fira Sans", "Noto Sans Thai", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [require("@tailwindcss/typography")],
