@@ -1,15 +1,18 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const Footer = () => {
   return (
     <div>
       <footer>
-        <div className="bg-cuof-grey-01 py-8 text-[13px]">
+        <div className="bg-cuof-grey-01 py-8 px-2 text-[13px]">
           <div className="flex flex-col items-center space-y-8">
-            <div className="flex flex-row justify-between items-center w-[320px]">
-              <div className="w-1/2">
-                <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
-              </div>
+            <div className="flex flex-row justify-between items-center max-w-[320px]">
+              <Link href="/">
+                <div className="w-1/2 hover:cursor-pointer">
+                  <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
+                </div>
+              </Link>
               <a href="https://www.github.com/chula-overflow" target="_blank">
                 <div className="flex flex-row mr-2">
                   <Image src="/graphic/github-icon.svg" width="18" height="18" alt="" />
@@ -21,7 +24,7 @@ const Footer = () => {
               <div className="flex justify-center items-center">
                 <p className="font-medium">Created by</p>
               </div>
-              <div className="flex flex-row items-center  justify-center space-x-4">
+              <div className="flex flex-row items-center justify-center space-x-4">
                 <div>
                   <p>Panithi Makthiengtrong</p>
                   <p>Pannawich Lohanimit</p>
