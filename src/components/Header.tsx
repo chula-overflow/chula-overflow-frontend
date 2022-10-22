@@ -1,6 +1,6 @@
 import Nav from "./Nav"
 import Menu from "./Menu"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type HeaderProps = {
   isLoggedIn: boolean
@@ -10,6 +10,11 @@ type HeaderProps = {
 
 const Header = ({ isLoggedIn, username, logOut }: HeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = ""
+  }, [menuOpen])
 
   return (
     <header>
