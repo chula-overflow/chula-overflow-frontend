@@ -20,7 +20,7 @@ const Menu = ({ isLoggedIn, username, logOut, closeMenu }: MenuProps) => {
       <div className="fixed top-0 right-0 bg-white shadow-menu h-full w-4/5 max-w-[325px] z-[98]">
         <div className="relative w-full h-full z-[99]">
           <div className="absolute top-0 left-0 w-[3px] h-full bg-cuof-gradient-v"></div>
-          <button onClick={closeMenu} className="absolute top-5 right-5 w-[24px] h-[24px]">
+          <button onClick={closeMenu} className="absolute top-2 right-[22px] w-[24px] h-[24px]">
             <div className="relative w-full h-full">
               <div className="absolute top-1/2 left-0 bg-cuof-grey-03 w-[24px] h-[4px] rounded-[9px] rotate-45"></div>
               <div className="absolute top-1/2 left-0 bg-cuof-grey-03 w-[24px] h-[4px] rounded-[9px] -rotate-45"></div>
