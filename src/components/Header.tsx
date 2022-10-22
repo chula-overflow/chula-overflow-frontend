@@ -1,14 +1,11 @@
 import Nav from "./Nav"
 import Menu from "./Menu"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { SessionContext } from "src/contexts/SessionState"
 
-type HeaderProps = {
-  isLoggedIn: boolean
-  username: string
-  logOut: () => void
-}
+const Header: React.FC = () => {
+  const { session } = useContext(SessionContext) // consume session from SessionContext
 
-const Header = ({ isLoggedIn, username, logOut }: HeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -22,7 +19,7 @@ const Header = ({ isLoggedIn, username, logOut }: HeaderProps) => {
       <div className={menuOpen ? "" : "hidden"}>
         <Menu
           isLoggedIn={true}
-          username="6530000021@student.chula.ac.th"
+          username={session.email} // session.email from SessionContext
           logOut={() => {
             console.log("log out")
           }}
