@@ -12,10 +12,10 @@ html {
 }
 
 #gradient-canvas {
-  --gradient-color-1: #ff8fcc;
+  --gradient-color-1: #fc9fd2;
   --gradient-color-2: #ffb78f;
-  --gradient-color-3: #eeeeee;
-  --gradient-color-4: #eeeeee;
+  --gradient-color-3: #fae8f9;
+  --gradient-color-4: #fae8f9;
 }
 
 #learn-more {
