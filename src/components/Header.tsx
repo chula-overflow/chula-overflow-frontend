@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       <Nav openMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
       <div className={menuOpen ? "" : "hidden"}>
         <Menu
-          isLoggedIn={true}
+          isLoggedIn={false}
           username={session.email} // session.email from SessionContext
           logOut={() => {
             console.log("log out")
