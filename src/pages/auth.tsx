@@ -25,10 +25,10 @@ const auth = () => {
         // console.log(`logged in as ${session.email}`)
         Router.back()
       } else {
-        setErrorMessage("Please enter Chula email")
+        setErrorMessage("Please enter a Chula email")
       }
     } else {
-      setErrorMessage("Please enter valid email")
+      setErrorMessage("Please enter a valid email")
     }
   }
 
