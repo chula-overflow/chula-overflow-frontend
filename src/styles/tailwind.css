@@ -10,3 +10,18 @@
 html {
   font-family: "Fira Sans", "Noto Sans Thai", sans-serif;
 }
+
+#learn-more {
+  animation: MoveUpDown 1.5s linear infinite;
+}
+
+@keyframes MoveUpDown {
+  0%,
+  50%,
+  100% {
+    margin-bottom: 30px;
+  }
+  25% {
+    margin-bottom: 40px;
+  }
+}
