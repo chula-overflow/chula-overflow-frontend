@@ -1,8 +1,11 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Footer from "@components/Footer"
 import { validateEmail } from "@utils/ValidateEmail"
+import { SessionContext } from "@contexts/SessionState"
 
 const auth = () => {
+  const { session, setSession } = useContext(SessionContext)
+
   const [username, setUsername] = useState("")
   const [errorMessage, setErrorMessage] = useState<string>("")
 
@@ -17,7 +20,8 @@ const auth = () => {
     if (validateEmail(username)) {
       if (validateEmail(username)?.includes("student.chula.ac.th")) {
         setErrorMessage("")
-        console.log(`logged in as ${username}`)
+        setSession({ email: username })
+        console.log(`logged in as ${session.email}`)
       } else {
         setErrorMessage("Please enter Chula email")
       }
@@ -48,9 +52,12 @@ const auth = () => {
               }}
             />
             {errorMessage && <p className="text-red-400 mb-3">{errorMessage}</p>}
-            <div className="flex justify-center items-center text-white bg-cuof-gradient-h h-[38px] w-[100px] rounded-[20px]">
-              <input type="submit" value="Log in" className="" />
-            </div>
+            <button
+              type="submit"
+              className="flex justify-center items-center text-white bg-cuof-gradient-h h-[38px] w-[100px] rounded-[20px]"
+            >
+              Log in
+            </button>
           </div>
         </form>
       </div>
