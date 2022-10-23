@@ -15,7 +15,7 @@ const SessionState: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
   useEffect(() => {
     setSession({
-      email: "6530000021@student.chula.ac.th",
+      email: "",
     })
   }, [])
 
