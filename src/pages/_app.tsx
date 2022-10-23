@@ -1,7 +1,7 @@
 import Header from "@components/Header"
+import SessionState from "@contexts/SessionState"
 import "@styles/tailwind.css"
 import type { AppProps } from "next/app"
-import SessionState from "src/contexts/SessionState"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

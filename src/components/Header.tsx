@@ -1,7 +1,7 @@
 import Nav from "./Nav"
 import Menu from "./Menu"
 import { useContext, useEffect, useState } from "react"
-import { SessionContext } from "src/contexts/SessionState"
+import { SessionContext } from "@contexts/SessionState"
 
 const Header: React.FC = () => {
   const { session } = useContext(SessionContext) // consume session from SessionContext
