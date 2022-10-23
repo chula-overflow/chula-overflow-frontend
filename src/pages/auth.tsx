@@ -1,18 +1,29 @@
-import Footer from "@components/Footer"
 import { useState } from "react"
+import Footer from "@components/Footer"
+import { validateEmail } from "@utils/ValidateEmail"
 
 const auth = () => {
   const [username, setUsername] = useState("")
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!username) {
-      alert("Please enter your username")
+      setErrorMessage("Please enter your username")
       return
     }
 
-    console.log(`logged in as ${username}`)
+    if (validateEmail(username)) {
+      if (validateEmail(username)?.includes("student.chula.ac.th")) {
+        setErrorMessage("")
+        console.log(`logged in as ${username}`)
+      } else {
+        setErrorMessage("Please enter Chula email")
+      }
+    } else {
+      setErrorMessage("Please enter valid email")
+    }
   }
 
   return (
@@ -30,9 +41,13 @@ const auth = () => {
               type="text"
               spellCheck="false"
               value={username}
-              className="border-cuof-grey-02 border-[1px] rounded-[5px] w-full p-2 mt-3 mb-10"
-              onChange={(e) => setUsername(e.target.value)}
+              className={`border-cuof-grey-02 border-[1px] rounded-[5px] w-full p-2 mt-3 mb-3`}
+              onChange={(e) => {
+                setUsername(e.target.value)
+                setErrorMessage("")
+              }}
             />
+            {errorMessage && <p className="text-red-400 mb-3">{errorMessage}</p>}
             <div className="flex justify-center items-center text-white bg-cuof-gradient-h h-[38px] w-[100px] rounded-[20px]">
               <input type="submit" value="Log in" className="" />
             </div>
