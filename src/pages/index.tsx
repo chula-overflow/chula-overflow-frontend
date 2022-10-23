@@ -1,18 +1,27 @@
 import Footer from "@components/Footer"
 import { DescribeRoute } from "@components/Meta/DescribeRoute"
+import { Gradient } from "@utils/Gradient"
 import type { NextPage } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Home: NextPage = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const gradient = new Gradient()
+
+  useEffect(() => {
+    // @ts-ignore
+    gradient.initGradient("#gradient-canvas")
+  }, [])
+
   return (
     <DescribeRoute title="Chula Overflow" description="chula-overflow">
-      <div>
+      <>
         <main>
-          <div className="flex justify-center items-start w-screen h-screen bg-[url('../../public/graphic/landing-gradient.jpg')]">
+          <div className="flex justify-center items-start w-full h-screen overflow-hidden">
+            <canvas id="gradient-canvas" className="absolute -z-10 w-full h-screen" data-transition-in />
             <div className="flex flex-col justify-between h-full">
               <div className="mt-[100px] flex flex-col justify-center items-center space-y-20">
                 <div className="flex flex-col justify-center items-center space-y-7">
@@ -127,7 +136,7 @@ const Home: NextPage = () => {
           </div>
         </main>
         <Footer />
-      </div>
+      </>
     </DescribeRoute>
   )
 }
