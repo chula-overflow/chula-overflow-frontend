@@ -11,6 +11,13 @@ html {
   font-family: "Fira Sans", "Noto Sans Thai", sans-serif;
 }
 
+#gradient-canvas {
+  --gradient-color-1: #fc9fd2;
+  --gradient-color-2: #ffb78f;
+  --gradient-color-3: #fae8f9;
+  --gradient-color-4: #fae8f9;
+}
+
 #learn-more {
   animation: MoveUpDown 1.5s linear infinite;
 }
