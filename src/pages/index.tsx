@@ -5,9 +5,11 @@ import type { NextPage } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { useScrollTo } from "react-use-window-scroll"
 
 const Home: NextPage = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const scrollTo = useScrollTo()
 
   const gradient = new Gradient()
 
@@ -19,7 +21,7 @@ const Home: NextPage = () => {
   return (
     <DescribeRoute title="Chula Overflow" description="chula-overflow">
       <>
-        <main>
+        <main className="scroll-smooth">
           <div className="flex justify-center items-start w-full h-screen overflow-hidden">
             <canvas id="gradient-canvas" className="absolute -z-10 w-full h-screen" data-transition-in />
             <div className="flex flex-col justify-between h-full">
@@ -46,11 +48,11 @@ const Home: NextPage = () => {
                   </Link>
                 </div>
               </div>
-              <div className="mb-[30px] flex flex-col justify-center items-center space-y-2">
-                <button className="text-[15px]">
+              <div id="learn-more" className="mb-[30px] flex flex-col justify-center items-center space-y-2">
+                <button onClick={() => scrollTo({ top: 700, left: 0, behavior: "smooth" })} className="text-[15px]">
                   <p className="over:cursor-pointer">Learn more</p>
                 </button>
-                <button>
+                <button onClick={() => scrollTo({ top: 700, left: 0, behavior: "smooth" })}>
                   <Image src="/graphic/landing-arrow.svg" width="28" height="28" />
                 </button>
               </div>
@@ -126,7 +128,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className=" flex flex-col justify-center items-center py-10 space-y-4">
+          <div className=" flex flex-col justify-center items-center py-10 space-y-4 bg-[url('../../public/graphic/landing-gradient.jpg')]">
             <p>What are you waiting for?</p>
             <Link href="/browse">
               <div className="flex justify-center items-center border-[1px] border-black rounded-[20px] text-[24px] px-12 py-1 hover:cursor-pointer">

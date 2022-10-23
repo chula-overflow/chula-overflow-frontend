@@ -17,3 +17,18 @@ html {
   --gradient-color-3: #eeeeee;
   --gradient-color-4: #eeeeee;
 }
+
+#learn-more {
+  animation: MoveUpDown 1.5s linear infinite;
+}
+
+@keyframes MoveUpDown {
+  0%,
+  50%,
+  100% {
+    margin-bottom: 30px;
+  }
+  25% {
+    margin-bottom: 40px;
+  }
+}

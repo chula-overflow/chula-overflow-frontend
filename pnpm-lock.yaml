@@ -18,6 +18,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.1.11
   react: 18.2.0
   react-dom: 18.2.0
+  react-use-window-scroll: ^1.0.14
   tailwindcss: ^3.1.4
   typescript: 4.7.4
 
@@ -26,6 +27,7 @@ dependencies:
   next-pwa: 5.6.0_next@12.3.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-use-window-scroll: 1.0.14_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
@@ -3647,6 +3649,17 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
 
+  /react-use-window-scroll/1.0.14_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gYA1hc9D3C7zfM+KLQO/Obuxvx7Gzg/w/auDkpmsA9XPKBxk0pLTrRmFTYYw+9K9CMxd0kn/GBYVGbh3TMZHew==}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      smoothscroll-polyfill: 0.4.4
+    dev: false
+
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
@@ -3872,6 +3885,10 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+
+  /smoothscroll-polyfill/0.4.4:
+    resolution: {integrity: sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==}
+    dev: false
 
   /source-list-map/2.0.1:
     resolution: {integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==}
