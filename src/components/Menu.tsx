@@ -17,6 +17,7 @@ const Menu = ({ closeMenu }: MenuProps) => {
       email: "",
     })
     router.push("/")
+    router.asPath === "/" && window.location.reload()
   }
 
   useEffect(closeMenu, [router.asPath])
@@ -64,7 +65,7 @@ const Menu = ({ closeMenu }: MenuProps) => {
                 </button>
               ) : (
                 <Link href="/auth">
-                  <div className="flex justify-center items-center border-[1px] border-black rounded-[20px] text-[24px] px-12 py-1">
+                  <div className="flex justify-center items-center border-[1px] border-black rounded-[20px] text-[24px] px-12 py-1 hover:cursor-pointer">
                     <p>Log in </p>
                   </div>
                 </Link>
