@@ -1,16 +1,23 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
+import { SessionContext } from "@contexts/SessionState"
 
 type MenuProps = {
-  isLoggedIn: boolean
-  username: string
-  logOut: () => void
   closeMenu: () => void
 }
 
-const Menu = ({ isLoggedIn, username, logOut, closeMenu }: MenuProps) => {
+const Menu = ({ closeMenu }: MenuProps) => {
   const router = useRouter()
+
+  const { session, setSession } = useContext(SessionContext)
+
+  const logOut = () => {
+    setSession({
+      email: "",
+    })
+    router.push("/")
+  }
 
   useEffect(closeMenu, [router.asPath])
 
@@ -44,12 +51,12 @@ const Menu = ({ isLoggedIn, username, logOut, closeMenu }: MenuProps) => {
               </Link>
             </div>
             <div className="flex flex-col items-end mb-[275px]">
-              <div className={`text-right text-[15px] ${isLoggedIn ? "" : "hidden"}`}>
+              <div className={`text-right text-[15px] ${session.email ? "" : "hidden"}`}>
                 <p>Logged in as</p>
-                <p>{username}</p>
+                <p>{session.email}</p>
               </div>
               <div className="h-5"></div>
-              {isLoggedIn ? (
+              {session.email ? (
                 <button onClick={logOut}>
                   <div className="flex justify-center items-center border-[1px] border-black rounded-[20px] text-[24px] px-12 py-1">
                     <p>Log out</p>

@@ -17,12 +17,7 @@ const Header: React.FC = () => {
     <header className="fixed top-0 w-full z-[100]">
       <Nav openMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
       <div className={menuOpen ? "" : "hidden"}>
-        <Menu
-          isLoggedIn={false}
-          username={session.email} // session.email from SessionContext
-          logOut={() => {
-            console.log("log out")
-          }}
+        <Menu // session.email from SessionContext
           closeMenu={() => setMenuOpen(false)}
         />
       </div>
