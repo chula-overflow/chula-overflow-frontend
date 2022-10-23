@@ -14,7 +14,7 @@ const Header: React.FC = () => {
   }, [menuOpen])
 
   return (
-    <header>
+    <header className="fixed top-0 w-full z-[100]">
       <Nav openMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
       <div className={menuOpen ? "" : "hidden"}>
         <Menu
