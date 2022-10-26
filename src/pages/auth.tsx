@@ -3,14 +3,16 @@ import Footer from "@components/Footer"
 import { validateEmail } from "@utils/ValidateEmail"
 import { SessionContext } from "@contexts/SessionState"
 import Router from "next/router"
+import { GetServerSideProps } from "next"
+import axios from "@utils/Axios"
 
 const Auth = () => {
-  const { session, setSession } = useContext(SessionContext)
+  const { login } = useContext(SessionContext)
 
   const [username, setUsername] = useState("")
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     if (!username) {
@@ -21,9 +23,7 @@ const Auth = () => {
     if (validateEmail(username)) {
       if (validateEmail(username)?.includes("student.chula.ac.th")) {
         setErrorMessage("")
-        setSession({ email: username })
-        // console.log(`logged in as ${session.email}`)
-        Router.back()
+        login(username)
       } else {
         setErrorMessage("Please enter a Chula email")
       }
@@ -44,7 +44,7 @@ const Auth = () => {
               Username / Email
             </label>
             <input
-              type="text"
+              type="email"
               spellCheck="false"
               value={username}
               className={`border-cuof-grey-02 border-[1px] rounded-[5px] w-full p-2 mt-3 mb-5`}
@@ -66,6 +66,23 @@ const Auth = () => {
       <Footer />
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = context.req.cookies?.sid
+
+  if (cookie) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
 export default Auth

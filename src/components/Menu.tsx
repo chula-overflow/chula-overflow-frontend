@@ -11,9 +11,7 @@ type MenuProps = {
 const Menu = ({ menuOpen, closeMenu }: MenuProps) => {
   const router = useRouter()
 
-  const { session } = useContext(SessionContext)
-
-  const logOut = () => {}
+  const { session, logout } = useContext(SessionContext)
 
   useEffect(closeMenu, [router.asPath])
 
@@ -63,7 +61,7 @@ const Menu = ({ menuOpen, closeMenu }: MenuProps) => {
               </div>
               <div className="h-5"></div>
               {session.email ? (
-                <button onClick={logOut}>
+                <button onClick={logout}>
                   <div className="flex justify-center items-center border-[1px] border-black rounded-[20px] text-[24px] px-12 py-1">
                     <p>Log out</p>
                   </div>
