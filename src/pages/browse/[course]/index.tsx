@@ -29,7 +29,7 @@ const Exams = () => {
               <h1 className="font-bold text-xl mb-2">
                 {i} - {semester[j]} - {midorfinal[k]}
               </h1>
-              <p className="text-gray-700 text-sm text-base">30 Problems</p>
+              <p className="text-gray-700 text-sm">30 Problems</p>
             </div>
           </div>
         )
@@ -39,11 +39,13 @@ const Exams = () => {
 
   return (
     <div>
-      <div className="ml-11 mt-20 mb-8">
-        <h1 className="font-bold text-4xl">Browse</h1>
-        <p className="text-2xl">{course}</p>
+      <div className="min-h-[90vh]">
+        <div className="ml-11 mt-20 mb-8">
+          <h1 className="font-bold text-4xl">Browse</h1>
+          <p className="text-2xl">{course}</p>
+        </div>
+        <div className="flex flex-wrap justify-center">{Elements}</div>
       </div>
-      <div className="flex flex-wrap justify-center">{Elements}</div>
       <Footer />
     </div>
   )

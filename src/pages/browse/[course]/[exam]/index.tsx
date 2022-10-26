@@ -51,7 +51,7 @@ const ExamProblem = () => {
         <div className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer">
           <div className="px-6 py-4 ">
             <h1 className="font-bold text-xl mb-2">{problem.question}</h1>
-            <p className="text-gray-700 text-sm text-base mb-[45px]">{problem.detail}</p>
+            <p className="text-gray-700 text-sm mb-[45px]">{problem.detail}</p>
           </div>
           <div className="absolute bottom-[11px] right-[98px] hover:cursor-pointer" onClick={() => setCount(count + 1)}>
             <Image src="/graphic/arrow-up.svg" width="24" height="24" />
@@ -67,13 +67,15 @@ const ExamProblem = () => {
 
   return (
     <div>
-      <div className="ml-11 mt-20 mb-8">
-        <h1 className="font-bold text-4xl">Browse</h1>
-        <p className="text-2xl">
-          {course} {exam}
-        </p>
+      <div className="min-h-[90vh]">
+        <div className="ml-11 mt-20 mb-8">
+          <h1 className="font-bold text-4xl">Browse</h1>
+          <p className="text-2xl">
+            {course} {exam}
+          </p>
+        </div>
+        <div className="flex flex-wrap justify-center">{postElements}</div>
       </div>
-      <div className="flex flex-wrap justify-center">{postElements}</div>
       <Footer />
     </div>
   )

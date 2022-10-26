@@ -53,19 +53,21 @@ const Courses = () => {
           <h1 className="font-bold text-xl mb-2">
             {subject.id} {subject.name.toUpperCase()}
           </h1>
-          <p className="text-gray-700 text-sm text-base">{subject.problems} Problems</p>
+          <p className="text-gray-700 text-sm">{subject.problems} Problems</p>
         </div>
       </div>
     )
   })
 
   return (
-    <div>
-      <div className="ml-11 mt-20 mb-8">
-        <h1 className="font-bold text-4xl">Browse</h1>
-        <p className="text-2xl">Courses</p>
+    <div className="">
+      <div className="min-h-[90vh]">
+        <div className="ml-11 mt-20 mb-8">
+          <h1 className="font-bold text-4xl">Browse</h1>
+          <p className="text-2xl">Courses</p>
+        </div>
+        <div className="flex flex-wrap justify-center">{postElements}</div>
       </div>
-      <div className="flex flex-wrap justify-center">{postElements}</div>
       <Footer />
     </div>
   )
