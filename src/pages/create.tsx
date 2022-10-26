@@ -19,7 +19,7 @@ const Create = () => {
     }
     console.log(subject, year, semester, subSemester, question, answer)
     setErrorMessage("")
-    Router.push("/")
+    Router.push("/title")
   }
 
   return (
@@ -126,7 +126,7 @@ const Create = () => {
                   type="submit"
                   className="flex justify-center items-center text-white bg-cuof-gradient-h h-[38px] w-[100px] rounded-[20px]"
                 >
-                  Submit
+                  Continue
                 </button>
               </div>
             </form>
