@@ -4,7 +4,7 @@ import { validateEmail } from "@utils/ValidateEmail"
 import { SessionContext } from "@contexts/SessionState"
 import Router from "next/router"
 
-const auth = () => {
+const Auth = () => {
   const { session, setSession } = useContext(SessionContext)
 
   const [username, setUsername] = useState("")
@@ -68,4 +68,4 @@ const auth = () => {
   )
 }
 
-export default auth
+export default Auth

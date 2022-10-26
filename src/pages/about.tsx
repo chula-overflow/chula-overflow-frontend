@@ -1,6 +1,6 @@
 import Footer from "@components/Footer"
 
-const about = () => {
+const About = () => {
   return (
     <div>
       <p className="mt-20">about</p>
@@ -9,4 +9,4 @@ const about = () => {
   )
 }
 
-export default about
+export default About

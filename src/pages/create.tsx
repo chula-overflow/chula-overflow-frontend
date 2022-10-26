@@ -2,7 +2,7 @@ import Footer from "@components/Footer"
 import { useState } from "react"
 import Router from "next/router"
 
-const create = () => {
+const Create = () => {
   const [subject, setSubject] = useState("")
   const [year, setYear] = useState("2022")
   const [semester, setSemester] = useState("1")
@@ -138,4 +138,4 @@ const create = () => {
   )
 }
 
-export default create
+export default Create
