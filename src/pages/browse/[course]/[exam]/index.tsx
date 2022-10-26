@@ -103,11 +103,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const examProperties = String(params?.exam).split("-")
+
   const examId = await (
     await axios.get(
-      `http://localhost:3002/exam/id?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`
+      `http://localhost:3002/exam/?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`
     )
-  ).data
+  ).data._id
 
   const threads = await (await axios.get(`http://localhost:3002/thread?exam_id=${examId}`)).data
 
