@@ -15,11 +15,9 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 w-full z-[100]">
-      <Nav openMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
-      <div className={menuOpen ? "" : "hidden"}>
-        <Menu // session.email from SessionContext
-          closeMenu={() => setMenuOpen(false)}
-        />
+      <div>
+        <Nav openMenu={() => setMenuOpen(true)} menuOpen={menuOpen} />
+        <Menu menuOpen={menuOpen} closeMenu={() => setMenuOpen(false)} />
       </div>
     </header>
   )

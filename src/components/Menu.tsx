@@ -4,31 +4,36 @@ import { useContext, useEffect } from "react"
 import { SessionContext } from "@contexts/SessionState"
 
 type MenuProps = {
+  menuOpen: boolean
   closeMenu: () => void
 }
 
-const Menu = ({ closeMenu }: MenuProps) => {
+const Menu = ({ menuOpen, closeMenu }: MenuProps) => {
   const router = useRouter()
 
-  const { session, setSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
-  const logOut = () => {
-    setSession({
-      email: "",
-    })
-    router.push("/")
-    router.asPath === "/" && window.location.reload()
-  }
+  const logOut = () => {}
 
   useEffect(closeMenu, [router.asPath])
 
   return (
     <div>
-      <button onClick={closeMenu} className="fixed top-0 left-0 w-screen h-screen bg-menu-bg z-[97]"></button>
-      <div className="fixed top-0 right-0 bg-white shadow-menu h-full w-4/5 max-w-[325px] z-[98]">
+      <div
+        className={`fixed top-0 left-0 w-screen h-screen bg-menu-bg duration-300 ${
+          menuOpen ? "opacity-100" : "opacity-0"
+        } z-[96] pointer-events-none`}
+      ></div>
+      {menuOpen && <div onClick={closeMenu} className={`fixed top-0 left-0 w-screen h-screen z-[98]`}></div>}
+
+      <div
+        className={`fixed duration-300 ease-in-out ${
+          menuOpen ? "" : "translate-x-full"
+        } top-0 right-0 bg-white shadow-menu h-full w-4/5 max-w-[325px] z-[98]`}
+      >
         <div className="relative w-full h-full z-[99]">
           <div className="absolute top-0 left-0 w-[3px] h-full bg-cuof-gradient-v"></div>
-          <button onClick={closeMenu} className="absolute top-2 right-[22px] w-[24px] h-[24px]">
+          <button onClick={closeMenu} className="absolute top-4 right-4 w-[24px] h-[24px]">
             <div className="relative w-full h-full">
               <div className="absolute top-1/2 left-0 bg-cuof-grey-03 w-[24px] h-[4px] rounded-[9px] rotate-45"></div>
               <div className="absolute top-1/2 left-0 bg-cuof-grey-03 w-[24px] h-[4px] rounded-[9px] -rotate-45"></div>
