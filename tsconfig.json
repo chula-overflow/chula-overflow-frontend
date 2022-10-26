@@ -18,7 +18,8 @@
       "@lib/*": ["src/lib/*"],
       "@services/*": ["src/services/*"],
       "@vectors/*": ["src/vectors/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@interfaces/*": ["src/interfaces/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,63 +1,16 @@
 import Footer from "@components/Footer"
 import React, { useEffect, useState } from "react"
-import Header from "@components/Header"
 import { useRouter } from "next/router"
+import { GetStaticProps, NextPage } from "next"
+import axios from "@utils/Axios"
+import { CourseBody } from "src/interfaces/course"
 
-const subject = [
-  {
-    id: "2301107",
-    name: "calculus 1",
-    problems: "90",
-  },
-  {
-    id: "2301107",
-    name: "calculus 1",
-    problems: "90",
-  },
-  {
-    id: "2301107",
-    name: "calculus 1",
-    problems: "90",
-  },
-  {
-    id: "2301107",
-    name: "calculus 1",
-    problems: "90",
-  },
-]
+interface CoursesProps {
+  courses: CourseBody[]
+}
 
-const Courses = () => {
+const Courses: NextPage<CoursesProps> = ({ courses }) => {
   const router = useRouter()
-  const [subjects, setSubjects] = useState([{ id: "", name: "", problems: "" }])
-
-  function getSubject() {
-    // const res = await fetch('...');
-    // const resJson = await res.json();
-    setSubjects(subject)
-  }
-
-  useEffect(() => {
-    getSubject()
-  }, [])
-
-  console.log(subject)
-
-  const postElements = subjects.map((subject) => {
-    return (
-      <div
-        key={subject.id}
-        className="w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer"
-        onClick={() => router.push(`browse/${subject.id} ${subject.name}`)}
-      >
-        <div className="px-6 py-4">
-          <h1 className="font-bold text-xl mb-2">
-            {subject.id} {subject.name.toUpperCase()}
-          </h1>
-          <p className="text-gray-700 text-sm">{subject.problems} Problems</p>
-        </div>
-      </div>
-    )
-  })
 
   return (
     <div className="">
@@ -66,11 +19,40 @@ const Courses = () => {
           <h1 className="font-bold text-4xl">Browse</h1>
           <p className="text-2xl">Courses</p>
         </div>
-        <div className="flex flex-wrap justify-center">{postElements}</div>
+        <div className="flex flex-wrap justify-center">
+          {courses.map((course, idx) => {
+            if (course.exam_ids?.length) {
+              return (
+                <div
+                  key={idx}
+                  className="w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer"
+                  onClick={() => router.push(`/browse/${course.course_id}`)}
+                  // onClick={() => router.push(`/browse/${course.course_id}-${course.course_name.replace(/\s+/g, "-")}`)}
+                >
+                  <div className="px-6 py-4">
+                    <h1 className="font-bold text-xl mb-2">
+                      {course.course_id} {course.course_name.toUpperCase()}
+                    </h1>
+                    <p className="text-gray-700 text-sm">{course.exam_ids?.length} Problems</p>
+                  </div>
+                </div>
+              )
+            } else return null
+          })}
+        </div>
       </div>
       <Footer />
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const courses: CourseBody[] = await (await axios.get("http://localhost:3002/course")).data
+
+  return {
+    props: { courses },
+    revalidate: 60,
+  }
 }
 
 export default Courses
