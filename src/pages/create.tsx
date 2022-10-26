@@ -1,6 +1,7 @@
 import Footer from "@components/Footer"
 import { useState } from "react"
 import Router from "next/router"
+import { GetServerSideProps } from "next"
 
 const Create = () => {
   const [subject, setSubject] = useState("")
@@ -136,6 +137,23 @@ const Create = () => {
       <Footer />
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = context.req.cookies?.sid
+
+  if (!cookie) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }
 
 export default Create
