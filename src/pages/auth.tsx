@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { FormEvent, useContext, useEffect, useState } from "react"
 import Footer from "@components/Footer"
 import { validateEmail } from "@utils/ValidateEmail"
 import { SessionContext } from "@contexts/SessionState"
@@ -10,7 +10,7 @@ const Auth = () => {
   const [username, setUsername] = useState("")
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     if (!username) {

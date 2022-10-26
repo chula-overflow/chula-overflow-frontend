@@ -8,17 +8,21 @@ const Footer = () => {
         <div className="bg-cuof-grey-01 py-8 px-2 text-[13px]">
           <div className="flex flex-col items-center space-y-8">
             <div className="flex flex-row justify-between items-center max-w-[320px]">
-              <Link href="/">
-                <div className="w-1/2 hover:cursor-pointer">
-                  <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
-                </div>
+              <Link href="/" passHref>
+                <a>
+                  <div className="w-1/2 hover:cursor-pointer">
+                    <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
+                  </div>
+                </a>
               </Link>
-              <a href="https://www.github.com/chula-overflow" target="_blank">
-                <div className="flex flex-row mr-2">
-                  <Image src="/graphic/github-icon.svg" width="18" height="18" alt="" />
-                  <p className="font-medium pl-1">/chula-overflow</p>
-                </div>
-              </a>
+              <Link href="https://www.github.com/chula-overflow" passHref>
+                <a target="_blank" rel="noreferrer">
+                  <div className="flex flex-row mr-2">
+                    <Image src="/graphic/github-icon.svg" width="18" height="18" alt="" />
+                    <p className="font-medium pl-1">/chula-overflow</p>
+                  </div>
+                </a>
+              </Link>
             </div>
             <div className="flex flex-col items-centers space-y-1">
               <div className="flex justify-center items-center">

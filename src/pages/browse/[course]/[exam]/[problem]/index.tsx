@@ -30,11 +30,13 @@ const ExamAnswer = () => {
     getAnswer()
   }, [])
 
-  console.log(problem)
   const [count, setCount] = useState(0)
   const postElements = answers.map((answer) => {
     return (
-      <div className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer">
+      <div
+        key={answer.detail}
+        className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer"
+      >
         <div className="px-6 py-4">
           <p className="text-gray-700 text-sm text-base">The solution is</p>
           <p className="text-gray-700 text-sm text-base mb-[45px]">{answer.detail}</p>

@@ -46,6 +46,7 @@ const ExamProblem = () => {
           pathname: "/browse/[course]/[exam]/[problem]",
           query: { course: `${course}`, exam: `${exam}`, problem: `${problem.question}` },
         }}
+        key={problem.question}
       >
         <div className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer">
           <div className="px-6 py-4 ">
