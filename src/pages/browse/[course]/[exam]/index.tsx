@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     await axios.get(
       `http://localhost:3002/exam/?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`
     )
-  ).data
+  ).data[0]
 
   const examId = exam._id
   const courseId = exam.course_id

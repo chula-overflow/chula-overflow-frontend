@@ -1,15 +1,21 @@
 import Footer from "@components/Footer"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Router from "next/router"
 import { GetServerSideProps, NextPage } from "next"
 import { CourseBody } from "src/interfaces/course"
 import axios from "@utils/Axios"
+import { SessionContext } from "@contexts/SessionState"
+import { ThreadCreateBody } from "src/interfaces/thread"
+import { CreateContext } from "@contexts/CreateState"
 
 interface CreateProps {
   courses: CourseBody[]
 }
 
 const Create: NextPage<CreateProps> = ({ courses }) => {
+  const { session } = useContext(SessionContext)
+  const { setThreadBody, setTitles } = useContext(CreateContext)
+
   const [subject, setSubject] = useState("")
   const [year, setYear] = useState("2022")
   const [semester, setSemester] = useState("1")
@@ -20,20 +26,60 @@ const Create: NextPage<CreateProps> = ({ courses }) => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    let createThreadBody: ThreadCreateBody
+    if (answer) {
+      createThreadBody = {
+        course_id: subject.split(" ")[0],
+        year: parseInt(year),
+        semester: semester,
+        term: subSemester,
+        uploaded_user: "123@student.chula.ac.th", // change to session.email after connected to auth service
+        question: question,
+        answer: answer,
+      }
+    } else {
+      createThreadBody = {
+        course_id: subject.split(" ")[0],
+        year: parseInt(year),
+        semester: semester,
+        term: subSemester,
+        uploaded_user: "123@student.chula.ac.th", // change to session.email after connected to auth service
+        question: question,
+      }
+    }
+
     if (!subject || !year || !semester || !subSemester || !question) {
       setErrorMessage("Please fill in all fields")
       return
     }
-    console.log(subject, year, semester, subSemester, question, answer)
+    setThreadBody(createThreadBody)
     setErrorMessage("")
-    Router.push("/title")
+
+    axios
+      .post("http://localhost:3003/tokenize", {
+        paragraph: question,
+      })
+      .then((res) => {
+        setTitles(res.data.sentences)
+        Router.push("/title")
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+
+    // axios
+    //   .post("http://localhost:3002/thread", {
+    //     ...createThreadBody,
+    //   })
+    //   .then(() => {})
   }
 
-  console.log(courses)
+  const years = [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012]
 
   return (
     <div>
-      <div className="h-screen max-w-[400px] mx-auto pt-[80px] px-[44px] flex flex-col items-center justify-start">
+      <div className="min-h-screen max-w-[400px] mx-auto pt-[80px] px-[44px] flex flex-col items-center justify-start">
         <div className="w-full ">
           <div className="text-[36px] font-semibold">
             <p>Add a problem</p>
@@ -72,10 +118,11 @@ const Create: NextPage<CreateProps> = ({ courses }) => {
                       setErrorMessage("")
                     }}
                   >
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
+                    {years.map((year, idx) => (
+                      <option key={idx} value={year}>
+                        {year}
+                      </option>
+                    ))}
                   </select>
                   <select
                     name=""

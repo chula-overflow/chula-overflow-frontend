@@ -1,4 +1,5 @@
 import Header from "@components/Header"
+import CreateState from "@contexts/CreateState"
 import SessionState from "@contexts/SessionState"
 import "@styles/tailwind.css"
 import type { AppProps } from "next/app"
@@ -8,8 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {/* provide SessionContext to all child */}
       <SessionState>
-        <Header />
-        <Component {...pageProps} />
+        <CreateState>
+          <Header />
+          <Component {...pageProps} />
+        </CreateState>
       </SessionState>
     </>
   )

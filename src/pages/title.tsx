@@ -1,26 +1,24 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Router from "next/router"
+import { CreateContext } from "@contexts/CreateState"
+import { NextPage } from "next"
 
-const Title = () => {
+const Title: NextPage = () => {
+  const { create, titles, setSelectedTitle } = useContext(CreateContext)
+
   const [titleSelection, setTitleSelection] = useState("-1")
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  const titles = {
-    option1: "title option 1",
-    option2: "title option 2",
-    option3: "title option 3",
-  }
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (titleSelection === "-1") {
       setErrorMessage("Please select a title")
       return
     }
     setErrorMessage("")
 
-    console.log("selected title: ", titleSelection)
-
-    Router.push("/")
+    // exec
+    setSelectedTitle(titles[parseInt(titleSelection) - 1])
+    await create()
   }
 
   const handleClick = (option: string) => {
@@ -39,39 +37,23 @@ const Title = () => {
             <p>Choose the best title for your problem</p>
           </div>
           <div className="flex flex-col justify-start items-center mt-4 mb-10 text-[18px] text-cuof-grey-02">
-            <button
-              id="option1"
-              onClick={() => handleClick("1")}
-              style={{
-                border: titleSelection === "1" ? "3px solid #000000" : "",
-                color: titleSelection === "1" ? "#000000" : "",
-              }}
-              className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "
-            >
-              <p className="text-left">{titles.option1}</p>
-            </button>
-            <button
-              id="option2"
-              onClick={() => handleClick("2")}
-              style={{
-                border: titleSelection === "2" ? "3px solid #000000" : "",
-                color: titleSelection === "2" ? "#000000" : "",
-              }}
-              className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "
-            >
-              <p className="text-left">{titles.option2}</p>
-            </button>
-            <button
-              id="option3"
-              onClick={() => handleClick("3")}
-              style={{
-                border: titleSelection === "3" ? "3px solid #000000" : "",
-                color: titleSelection === "3" ? "#000000" : "",
-              }}
-              className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "
-            >
-              <p className="text-left">{titles.option3}</p>
-            </button>
+            {titles.map((title, idx) => {
+              return (
+                <button
+                  id={`option${idx + 1}`}
+                  onClick={() => handleClick(`${idx + 1}`)}
+                  // style={{
+                  //   border: titleSelection === `${idx + 1}` ? "3px solid #000000" : "",
+                  //   color: titleSelection === `${idx + 1}` ? "#000000" : "",
+                  // }}
+                  className={`ring-cuof-grey-02 duration-200 rounded-[20px] w-full px-6 py-6 mt-6 ${
+                    titleSelection === `${idx + 1}` ? "ring-[3px]" : "ring-1"
+                  }`}
+                >
+                  <p className="text-left">{title}</p>
+                </button>
+              )
+            })}
           </div>
           {errorMessage && <p className="text-red-400 mb-5">{errorMessage}</p>}
           <div className="self-end flex flex-row justify-end space-x-3">

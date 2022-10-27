@@ -19,3 +19,14 @@ export interface ThreadBody {
     downvoted: number
   }[]
 }
+
+export interface ThreadCreateBody {
+  course_id: string
+  year: number
+  semester: string
+  term: string
+  uploaded_user: string
+  question: string
+  question_title?: string
+  answer?: string
+}
