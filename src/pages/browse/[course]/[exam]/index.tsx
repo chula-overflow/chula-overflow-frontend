@@ -20,7 +20,7 @@ const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
 
   const upvoteThread = async (threadId: string) => {
     await axios
-      .post(`http://localhost:3002/thread/upvote/${threadId}`)
+      .post(`/thread/upvote/${threadId}`)
       .then(() => {})
       .catch((err) => {
         console.error(err.message)
@@ -29,7 +29,7 @@ const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
 
   const downvoteThread = async (threadId: string) => {
     await axios
-      .post(`http://localhost:3002/thread/downvote/${threadId}`)
+      .post(`/thread/downvote/${threadId}`)
       .then(() => {})
       .catch((err) => {
         console.error(err.message)
@@ -90,7 +90,7 @@ const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const exams: ExamBody[] = await (await axios.get("http://localhost:3002/exam")).data
+  const exams: ExamBody[] = await (await axios.get("/exam")).data
 
   const paths = exams.map((exam: ExamBody) => {
     return {
@@ -119,9 +119,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const examId = exam._id
   const courseId = exam.course_id
 
-  const course: CourseBody = await (await axios.get(`http://localhost:3002/course/${courseId}`)).data
+  const course: CourseBody = await (await axios.get(`/course/${courseId}`)).data
 
-  const threads = await (await axios.get(`http://localhost:3002/thread?exam_id=${examId}`)).data
+  const threads = await (await axios.get(`/thread?exam_id=${examId}`)).data
 
   return {
     props: { threads, course, exam },

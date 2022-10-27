@@ -47,7 +47,7 @@ const Courses: NextPage<CoursesProps> = ({ courses }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const courses: CourseBody[] = await (await axios.get("http://localhost:3002/course")).data
+  const courses: CourseBody[] = await (await axios.get("/course")).data
 
   return {
     props: { courses },

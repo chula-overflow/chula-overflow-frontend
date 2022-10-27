@@ -9,10 +9,8 @@ const Footer = () => {
           <div className="flex flex-col items-center space-y-8">
             <div className="flex flex-row justify-between items-center max-w-[320px]">
               <Link href="/" passHref>
-                <a>
-                  <div className="w-1/2 hover:cursor-pointer">
-                    <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
-                  </div>
+                <a className="w-1/2 hover:cursor-pointer">
+                  <Image src="/graphic/cuof-logo-text.svg" width="297" height="98" alt="" />
                 </a>
               </Link>
               <Link href="https://www.github.com/chula-overflow" passHref>
