@@ -38,8 +38,8 @@ const ExamAnswer = () => {
         className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer"
       >
         <div className="px-6 py-4">
-          <p className="text-gray-700 text-sm text-base">The solution is</p>
-          <p className="text-gray-700 text-sm text-base mb-[45px]">{answer.detail}</p>
+          <p className="text-gray-700">The solution is</p>
+          <p className="text-gray-700 mb-[45px]">{answer.detail}</p>
         </div>
         <div className="absolute bottom-[11px] right-[98px] hover:cursor-pointer" onClick={() => setCount(count + 1)}>
           <Image src="/graphic/arrow-up.svg" width="24" height="24" />
@@ -55,8 +55,8 @@ const ExamAnswer = () => {
   return (
     <div>
       <div className="ml-11 mt-20 mb-8">
-        <h1 className="font-bold text-4xl">Browse</h1>
-        <p className="text-2xl">
+        <h1 className="font-bold text-3xl">Browse Problem</h1>
+        <p className="">
           {course} {exam}
         </p>
       </div>
@@ -64,7 +64,7 @@ const ExamAnswer = () => {
         <div className="w-4/5 overflow-hidden border-black border rounded-2xl mb-8 hover:cursor-pointer">
           <div className="px-6 py-4">
             <h1 className="font-bold text-xl mb-4 mt-4">{problem.question}</h1>
-            <p className="text-gray-700 text-sm text-base">{problem.detail}</p>
+            <p className="text-gray-700 text-sm">{problem.detail}</p>
           </div>
         </div>
         {postElements}

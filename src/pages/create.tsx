@@ -1,9 +1,15 @@
 import Footer from "@components/Footer"
 import { useState } from "react"
 import Router from "next/router"
-import { GetServerSideProps } from "next"
+import { GetServerSideProps, NextPage } from "next"
+import { CourseBody } from "src/interfaces/course"
+import axios from "@utils/Axios"
 
-const Create = () => {
+interface CreateProps {
+  courses: CourseBody[]
+}
+
+const Create: NextPage<CreateProps> = ({ courses }) => {
   const [subject, setSubject] = useState("")
   const [year, setYear] = useState("2022")
   const [semester, setSemester] = useState("1")
@@ -22,6 +28,8 @@ const Create = () => {
     setErrorMessage("")
     Router.push("/title")
   }
+
+  console.log(courses)
 
   return (
     <div>
@@ -43,7 +51,13 @@ const Create = () => {
                     setSubject(e.target.value)
                     setErrorMessage("")
                   }}
+                  list="course"
                 />
+                <datalist id="course">
+                  {courses.map((course, idx) => (
+                    <option key={idx} value={`${course.course_id} ${course.course_name}`} />
+                  ))}
+                </datalist>
               </div>
               <div className="w-full">
                 <label>Select semester</label>
@@ -140,19 +154,22 @@ const Create = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const courses: CourseBody[] = await (await axios.get("http://localhost:3002/course")).data
   const cookie = context.req.cookies?.sid
 
-  if (!cookie) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    }
-  }
+  // if (!cookie) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth",
+  //       permanent: false,
+  //     },
+  //   }
+  // }
 
   return {
-    props: {},
+    props: {
+      courses,
+    },
   }
 }
 

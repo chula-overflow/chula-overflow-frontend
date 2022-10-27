@@ -43,7 +43,7 @@ const Title = () => {
               id="option1"
               onClick={() => handleClick("1")}
               style={{
-                border: titleSelection === "1" ? "2px solid #000000" : "",
+                border: titleSelection === "1" ? "3px solid #000000" : "",
                 color: titleSelection === "1" ? "#000000" : "",
               }}
               className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "
@@ -54,7 +54,7 @@ const Title = () => {
               id="option2"
               onClick={() => handleClick("2")}
               style={{
-                border: titleSelection === "2" ? "2px solid #000000" : "",
+                border: titleSelection === "2" ? "3px solid #000000" : "",
                 color: titleSelection === "2" ? "#000000" : "",
               }}
               className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "
@@ -65,7 +65,7 @@ const Title = () => {
               id="option3"
               onClick={() => handleClick("3")}
               style={{
-                border: titleSelection === "3" ? "2px solid #000000" : "",
+                border: titleSelection === "3" ? "3px solid #000000" : "",
                 color: titleSelection === "3" ? "#000000" : "",
               }}
               className="border-cuof-grey-02 border-[1px] rounded-[20px] w-full px-6 py-6 mt-6 "

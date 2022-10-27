@@ -7,14 +7,16 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import axios from "@utils/Axios"
 import { ExamBody } from "src/interfaces/exam"
 import { ThreadBody } from "src/interfaces/thread"
+import { CourseBody } from "src/interfaces/course"
 
 interface ExamProblemProps {
   threads: ThreadBody[]
+  course: CourseBody
+  exam: ExamBody
 }
 
-const ExamProblem: NextPage<ExamProblemProps> = ({ threads }) => {
+const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
   const router = useRouter()
-  const { course, exam } = router.query
 
   const upvoteThread = async (threadId: string) => {
     await axios
@@ -38,10 +40,14 @@ const ExamProblem: NextPage<ExamProblemProps> = ({ threads }) => {
     <div>
       <div className="min-h-[90vh]">
         <div className="ml-11 mt-20 mb-8">
-          <h1 className="font-bold text-4xl">Browse</h1>
-          <div className="text-lg flex justify-between w-full pr-12">
-            <p>{course}</p>
-            <p>{exam}</p>
+          <h1 className="font-bold text-3xl">Browse Threads</h1>
+          <div className="flex space-x-7 w-full pr-12">
+            <p>
+              {course.course_id} {course.course_name}
+            </p>
+            <p>
+              {exam.year} - {exam.semester} - {exam.term}
+            </p>
           </div>
         </div>
         <div className="flex flex-wrap justify-center">
@@ -104,16 +110,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const examProperties = String(params?.exam).split("-")
 
-  const examId = await (
+  const exam: ExamBody = await (
     await axios.get(
       `http://localhost:3002/exam/?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`
     )
-  ).data._id
+  ).data
+
+  const examId = exam._id
+  const courseId = exam.course_id
+
+  const course: CourseBody = await (await axios.get(`http://localhost:3002/course/${courseId}`)).data
 
   const threads = await (await axios.get(`http://localhost:3002/thread?exam_id=${examId}`)).data
 
   return {
-    props: { threads },
+    props: { threads, course, exam },
   }
 }
 

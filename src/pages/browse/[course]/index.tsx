@@ -19,7 +19,7 @@ const Exams: NextPage<ExamsProps> = ({ exams, course }) => {
     <div>
       <div className="min-h-[90vh]">
         <div className="ml-11 mt-20 mb-8">
-          <h1 className="font-bold text-4xl">Browse</h1>
+          <h1 className="font-bold text-4xl">Browse Exams</h1>
           <p className="text-2xl">
             {course.course_id} {course.course_name}
           </p>
