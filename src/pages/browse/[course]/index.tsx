@@ -47,7 +47,7 @@ const Exams: NextPage<ExamsProps> = ({ exams, course }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const courses: CourseBody[] = await (await axios.get("http://localhost:3002/course")).data
+  const courses: CourseBody[] = await (await axios.get("/course")).data
 
   const paths = courses.map((course: CourseBody) => {
     return {
@@ -66,8 +66,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const courseId = params?.course
 
-  const exams: ExamBody[] = await (await axios.get(`http://localhost:3002/exam?course_id=${courseId}`)).data
-  const course: CourseBody = await (await axios.get(`http://localhost:3002/course/${courseId}`)).data
+  const exams: ExamBody[] = await (await axios.get(`/exam?course_id=${courseId}`)).data
+  const course: CourseBody = await (await axios.get(`/course/${courseId}`)).data
 
   return {
     props: {
