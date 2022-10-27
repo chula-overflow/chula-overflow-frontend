@@ -46,6 +46,7 @@ const CreateState: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       .post("http://localhost:3002/thread", { ...threadBody, question_title: selectedTitle })
       .then((res) => {
         console.log(res.data)
+        router.push(`/browse/${res.data.course_id}`)
       })
       .catch((err) => {
         console.error(err.message)

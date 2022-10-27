@@ -34,6 +34,7 @@ const SessionState: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       })
       .then((res) => {
         router.push("/")
+        getSession()
       })
       .catch((err) => {
         console.error(err.message)

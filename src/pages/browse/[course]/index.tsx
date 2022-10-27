@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const courseId = params?.course
 
   const exams: ExamBody[] = await (await axios.get(`/exam?course_id=${courseId}`)).data
-  const course: CourseBody = await (await axios.get(`/course/${courseId}`)).data
+  const course: CourseBody = await (await axios.get(`http://localhost:3002/course/${courseId}`)).data
 
   return {
     props: {

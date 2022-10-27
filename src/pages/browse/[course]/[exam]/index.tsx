@@ -15,26 +15,26 @@ interface ExamProblemProps {
   exam: ExamBody
 }
 
+const upvoteThread = async (threadId: string) => {
+  await axios
+    .post(`http://localhost:3002/thread/upvote/${threadId}`)
+    .then(() => {})
+    .catch((err) => {
+      console.error(err.message)
+    })
+}
+
+const downvoteThread = async (threadId: string) => {
+  await axios
+    .post(`http://localhost:3002/thread/downvote/${threadId}`)
+    .then(() => {})
+    .catch((err) => {
+      console.error(err.message)
+    })
+}
+
 const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
   const router = useRouter()
-
-  const upvoteThread = async (threadId: string) => {
-    await axios
-      .post(`/thread/upvote/${threadId}`)
-      .then(() => {})
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }
-
-  const downvoteThread = async (threadId: string) => {
-    await axios
-      .post(`/thread/downvote/${threadId}`)
-      .then(() => {})
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }
 
   return (
     <div>
@@ -52,39 +52,72 @@ const ExamProblem: NextPage<ExamProblemProps> = ({ threads, course, exam }) => {
         </div>
         <div className="flex flex-wrap justify-center">
           {threads.map((thread, idx) => {
-            return (
-              <div
-                key={idx}
-                className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer"
-              >
-                <div className="px-6 py-4 z-10">
-                  <h1 className="font-bold text-xl mb-2">{}</h1>
-                  <p className="text-gray-700 text-sm mb-[45px]">{}</p>
-                </div>
-                <div
-                  className="absolute bottom-[11px] right-[98px] hover:cursor-pointer z-10"
-                  onClick={() => upvoteThread(thread._id)}
-                >
-                  <Image src="/graphic/arrow-up.svg" width="24" height="24" />
-                </div>
-                <div className="absolute bottom-[17px] right-[64px] hover:cursor-pointer z-10">
-                  {thread.upvoted + thread.downvoted}
-                </div>
-                <div
-                  className="absolute bottom-[11px] right-[13px] hover:cursor-pointer z-10"
-                  onClick={() => downvoteThread(thread._id)}
-                >
-                  <Image src="/graphic/arrow-down.svg" width="24" height="24" />
-                </div>
-                <Link href={`${router.asPath}/${thread._id}`}>
-                  <div className="absolute top-0 left-0 right-0 bottom-0"></div>
-                </Link>
-              </div>
-            )
+            return <ThreadCard key={idx} thread={thread} />
           })}
         </div>
       </div>
       <Footer />
+    </div>
+  )
+}
+
+interface ThreadCardProps {
+  thread: ThreadBody
+}
+
+const ThreadCard: React.FC<ThreadCardProps> = ({ thread }) => {
+  const router = useRouter()
+
+  const [click, setClick] = useState<string>("")
+
+  return (
+    <div className="relative w-4/5 overflow-hidden border-black border rounded-2xl mb-5 hover:cursor-pointer">
+      <div className="px-6 py-4 z-10">
+        <h1 className="font-bold text-xl mb-2">{thread.problems[0].title}</h1>
+        <p className="text-gray-700 text-sm mb-[45px]">{thread.problems[0].body}</p>
+      </div>
+      <div
+        className={`absolute bottom-[11px] right-[98px] hover:cursor-pointer z-10 ${
+          click === "up" ? "" : "opacity-20"
+        }`}
+        onClick={() => {
+          if (click === "up") {
+            setClick("")
+            downvoteThread(thread._id)
+          } else {
+            setClick("up")
+            upvoteThread(thread._id)
+          }
+        }}
+      >
+        <Image src="/graphic/arrow-up.svg" width="24" height="24" />
+      </div>
+      <div className="absolute bottom-[17px] right-[64px] hover:cursor-pointer z-10">
+        {click === ""
+          ? thread.upvoted + thread.downvoted
+          : click === "up"
+          ? thread.upvoted + thread.downvoted + 1
+          : thread.upvoted + thread.downvoted - 1}
+      </div>
+      <div
+        className={`absolute bottom-[11px] right-[13px] hover:cursor-pointer z-10 ${
+          click === "down" ? "" : "opacity-20"
+        }`}
+        onClick={() => {
+          if (click === "down") {
+            setClick("")
+            upvoteThread(thread._id)
+          } else {
+            setClick("down")
+            downvoteThread(thread._id)
+          }
+        }}
+      >
+        <Image src="/graphic/arrow-down.svg" width="24" height="24" />
+      </div>
+      <Link href={`${router.asPath}/${thread._id}`}>
+        <div className="absolute top-0 left-0 right-0 bottom-0"></div>
+      </Link>
     </div>
   )
 }
@@ -111,20 +144,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const examProperties = String(params?.exam).split("-")
 
   const exam: ExamBody = await (
-    await axios.get(
-      `http://localhost:3002/exam/?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`
-    )
+    await axios.get(`/exam/?year=${examProperties[0]}&semester=${examProperties[1]}&term=${examProperties[2]}`)
   ).data[0]
 
   const examId = exam._id
   const courseId = exam.course_id
 
-  const course: CourseBody = await (await axios.get(`/course/${courseId}`)).data
+  const course: CourseBody = await (await axios.get(`http://localhost:3002/course/${courseId}`)).data
 
-  const threads = await (await axios.get(`/thread?exam_id=${examId}`)).data
+  const threads = await (await axios.get(`http://localhost:3002/thread?exam_id=${examId}`)).data
 
   return {
     props: { threads, course, exam },
+    revalidate: 10,
   }
 }
 

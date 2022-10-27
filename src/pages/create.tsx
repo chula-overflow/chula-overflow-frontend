@@ -69,7 +69,7 @@ const Create: NextPage<CreateProps> = ({ courses }) => {
       })
 
     // axios
-    //   .post("http://localhost:3002/thread", {
+    //   .post("/thread", {
     //     ...createThreadBody,
     //   })
     //   .then(() => {})
@@ -201,17 +201,17 @@ const Create: NextPage<CreateProps> = ({ courses }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const courses: CourseBody[] = await (await axios.get("http://localhost:3002/course")).data
+  const courses: CourseBody[] = await (await axios.get("/course")).data
   const cookie = context.req.cookies?.sid
 
-  // if (!cookie) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth",
-  //       permanent: false,
-  //     },
-  //   }
-  // }
+  if (!cookie) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    }
+  }
 
   return {
     props: {
