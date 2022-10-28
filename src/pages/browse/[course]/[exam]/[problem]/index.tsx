@@ -47,9 +47,18 @@ const downvoteAnswer = async (answerId: string) => {
     })
 }
 
+const addAnswer = async (threadId: string, answer: string) => {
+  await axios.post("http://localhost:3002/thread/answer", {
+    thread_id: threadId,
+    body: answer,
+  })
+}
+
 const ExamAnswer: NextPage<ExamAnswerProps> = ({ thread }) => {
   const router = useRouter()
   const { course, exam } = router.query
+
+  const [answer, setAnswer] = useState<string>("")
 
   return (
     <div>
@@ -71,6 +80,32 @@ const ExamAnswer: NextPage<ExamAnswerProps> = ({ thread }) => {
             return <AnswerCard key={idx} answer={answer} />
           })}
         </div>
+        <form
+          onSubmit={(e) => {
+            if (answer) {
+              e.preventDefault()
+
+              addAnswer(thread._id, answer)
+
+              router.reload()
+            }
+          }}
+          className="w-full px-10 my-20"
+        >
+          <p>Submit answer</p>
+          <textarea
+            value={answer}
+            onChange={(e) => {
+              setAnswer(e.target.value)
+            }}
+            className={`border-cuof-grey-02 border-[1px] rounded-[5px] w-full min-h-[90px] px-2 py-1 mt-2 box-border`}
+          />
+          <div className="flex justify-end">
+            <button type="submit" className="px-5 py-2 rounded-full bg-cuof-gradient-h text-white mt-3">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
       <Footer />
     </div>
